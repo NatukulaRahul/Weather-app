@@ -1,11 +1,11 @@
 {
-  "name": "Weather App",
-  "short_name": "Weather",
-  "description": "A beautiful weather app",
+  "name": "RK Weather",
+  "short_name": "RK Weather",
+  "description": "RK Weather — lightning-fast, beautifully designed forecasts with realtime rain alerts, air quality, UV index, and 7-day predictions tailored to your city.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0A0F2C",
+  "theme_color": "#0A0F2C",
   "icons": [
     {
       "src": "/icons/icon-192.png",

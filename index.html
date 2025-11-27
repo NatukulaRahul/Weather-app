@@ -2,14 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/weather-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>weather-app</title>
+
+    <!-- 🔥 Favicon -->
+    <link rel="icon" href="/icons/icon-192.png" />
+
+    <!-- 🔥 PWA -->
     <link rel="manifest" href="/manifest.json" />
-<link rel="apple-touch-icon" href="/icons/icon-192.png">
-<meta name="theme-color" content="#000000" />
-<link rel="apple-touch-startup-image" href="/icons/icon-512.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <meta name="theme-color" content="#1E6BD6" />
+    <link rel="apple-touch-startup-image" href="/icons/icon-512.png">
+
+    <!-- 🔥 SEO -->
+    <title>RK Weather | Realtime Forecasts, Air Quality & Rain Alerts</title>
+
+    <meta 
+      name="description" 
+      content="RK Weather — lightning-fast, beautifully designed forecasts with realtime rain alerts, air quality, UV index, and 7-day predictions tailored to your city."
+    />
+
+    <meta 
+      name="keywords" 
+      content="weather, RK Weather, realtime weather, rain alerts, air quality index, UV index, 7-day forecast, live weather, climate, temperature, humidity, wind speed"
+    />
+
+    <meta name="author" content="RK Weather" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- 🔥 Social Sharing (OpenGraph) -->
+    <meta property="og:title" content="RK Weather — Clean, Fast & Smart Forecasts" />
+    <meta property="og:description" content="Realtime rain alerts, air quality, UV index, hourly & 7-day forecasts — beautifully designed." />
+    <meta property="og:image" content="/icons/icon-512.png" />
+    <meta property="og:url" content="https://rkweather.vercel.app" />
+    <meta property="og:type" content="website" />
+
+    <!-- 🔥 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RK Weather — Realtime Forecasts" />
+    <meta name="twitter:description" content="Lightning-fast weather updates with rain alerts, AQI, UV index & more." />
+    <meta name="twitter:image" content="/icons/icon-512.png" />
+
+    <!-- 🔥 Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

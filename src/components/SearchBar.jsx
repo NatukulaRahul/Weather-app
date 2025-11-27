@@ -1,51 +1,107 @@
 import { useState } from "react";
-import { Search } from "lucide-react"; // icon library
-import { motion } from "framer-motion";
+import { Search, MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch, showLocationIcon }) {
   const [input, setInput] = useState("");
 
-  const handleSubmit = () => {
-    if (input.trim() !== "") {
-      onSearch(input.trim());
-      setInput("");
-    }
-  };
-
   return (
-    <motion.div  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.4 }}
-    className="w-full flex flex-col sm:flex-row gap-3">
+    <div className="flex items-center gap-3 w-full">
 
-      {/* Apple-style input */}
-      <div className="flex items-center w-full sm:flex-1 px-4 py-3 bg-white/15 border border-white/25
-       backdrop-blur-2xl rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+      {/* SEARCH BAR */}
+      <div className="
+        relative 
+        bg-white 
+        rounded-full 
+        shadow-md 
+        flex items-center 
+        px-4 
+        h-[56px] md:h-[60px] 
+        w-full
+      ">
 
-        {/* Search Icon */}
-        <Search className="text-white/80 w-5 h-5 mr-3" />
+        <Search className="text-gray-500" size={22} />
 
-        {/* Input */}
         <input
           type="text"
-          placeholder="Search city"
+          className="
+            ml-3 
+            w-full 
+            text-gray-800 
+            outline-none 
+            bg-transparent 
+            pr-12 
+            text-base md:text-lg
+          "
+          placeholder="Search city..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 bg-transparent text-white placeholder-white/60
-           focus:outline-none text-lg"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && input.trim() !== "") {
+              onSearch(input.trim());
+              setInput("");
+            }
+          }}
         />
+
+        <AnimatePresence>
+  {input.trim() !== "" && (
+    <motion.button
+      key="arrow"
+      initial={{ opacity: 0, x: 10 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 10 }}
+      transition={{ duration: 0.2 }}
+      onClick={() => {
+        onSearch(input.trim());
+        setInput("");
+      }}
+      className="
+        absolute right-2 flex items-center justify-center shadow-md active:scale-95
+
+        /* MOBILE (default) */
+        w-10 h-10 rounded-full bg-blue-500 text-white
+
+        /* DESKTOP */
+        sm:w-auto sm:h-auto sm:px-4 sm:py-2 sm:rounded-full sm:bg-blue-500
+      "
+    >
+      <ArrowRight size={20} strokeWidth={2.5} />
+    </motion.button>
+  )}
+</AnimatePresence>
+
       </div>
 
-      {/* Apple-style button */}
-      <button
-        onClick={handleSubmit}
-        className="px-6 py-3 bg-white/20 border border-white/20 backdrop-blur-xl 
-        rounded-full text-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] sm:w-auto w-full
-        active:scale-95 transition-transform"
-      >
-        Search
-      </button>
-    </motion.div>
+      {/* LOCATION BUTTON */}
+      {showLocationIcon && (
+        <button
+          onClick={() =>
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                onSearch(`${pos.coords.latitude},${pos.coords.longitude}`);
+              },
+              () => alert("Location access denied")
+            )
+          }
+          className="
+            w-[56px] h-[56px] 
+            md:w-[60px] md:h-[60px]
+            rounded-full 
+            bg-gradient-to-r 
+            from-blue-400 to-blue-600 
+            flex items-center justify-center 
+            shadow-lg 
+            active:scale-90 
+            transition
+          "
+        >
+          <MapPin color="white" size={24} />
+        </button>
+      )}
+
+    </div>
   );
 }
 
